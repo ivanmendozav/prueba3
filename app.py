@@ -50,15 +50,15 @@ st.subheader("Horas de Sueño por Raza")
 fig = px.box(df, x="Raza", y="Horas Sueño")
 st.plotly_chart(fig)
 if st.toggle("Realizar prueba estadística",key="Kruskal"):
-    st.markdown("**Pruebas de Normalidad entre razas (no pasa):**")
-    fig = px.histogram(df, x="Horas Sueño", color="Raza")
-    st.plotly_chart(fig)
+    st.markdown("**Pruebas de Normalidad entre razas (no pasa):**")    
     S,pvalue = stats.shapiro(df[df["Raza"]=="Ragdoll"]["Horas Sueño"])
     st.write(f"P Valor de Shapiro raza Ragdoll: {pvalue}")
     S,pvalue = stats.shapiro(df[df["Raza"]=="Maine coon"]["Horas Sueño"])
     st.write(f"P Valor de Shapiro raza Maine coon: {pvalue}")
     S,pvalue = stats.shapiro(df[df["Raza"]=="Angora"]["Horas Sueño"])
     st.write(f"P Valor de Shapiro raza Angora: {pvalue}")
+    fig = px.histogram(df, x="Horas Sueño", color="Raza")
+    st.plotly_chart(fig)
     st.markdown("**Prueba de Kruskal-Wallis**")
     K,pvalue = stats.kruskal(df[df["Raza"]=="Ragdoll"]["Horas Sueño"],
                 df[df["Raza"]=="Maine coon"]["Horas Sueño"],
